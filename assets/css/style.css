@@ -4,8 +4,6 @@ body {
     line-height: 1;
     align-items: center;
     background-color: lightgray;
-    /* background-image: url("https://inotechnologies.com/wp-content/uploads/2017/05/Lightning-Storm-on-Road-x500.jpg");
-opacity: 0.5; */
 }
 
 textarea {
@@ -113,7 +111,8 @@ p {
     border: solid black;
     border-radius: 2px;
     border-width: 1px;
-    background-color: lightblue;;
+    background-color: lightblue;
+    ;
 }
 
 #fiveDaybanner {
@@ -133,7 +132,7 @@ p {
 
 .days {
     width: 17%;
-    height: 150px;
+    height: 200px;
     color: white;
     background-color: rgb(56, 56, 66);
     display: flex;
