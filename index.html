@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+
+    <header class="jumbotron">
+        <h1>Weather Dashboard</h1>
+        <!-- insert banner here -->
+
+    </header>
+    <div class="divide">
+        <div class="lSide">
+            <div id="searchDiv">
+                <!-- <div id="gap"> -->
+                <p>Search for a city:</p>
+                <!-- search for city -->
+                <textarea class="Btn" id="searchField" name="searchbar" id="sb1" cols="30" rows="10"></textarea>
+                <!-- </div> -->
+                <div class="Btn" id="srcBtn">Search</div>
+            </div>
+            <div id="resultsDiv">
+                <!-- results from search -->
+                <div class="resultBtn">
+                    austin
+                </div>
+                <div class="resultBtn">
+                    new york   
+                </div>
+                <div class="resultBtn">
+                    st louis
+                </div>
+                <div class="resultBtn">
+                    orlando
+                </div>
+                <div class="resultBtn">
+                    denver
+                </div>
+            </div>
+        </div>
+
+        <div class="rSide">
+            <div id="localFcst">
+
+                local forecast
+
+            </div>
+            <div>
+                <div id="fiveDaybanner">5-Day Forecast:</div>
+                <div id="fiveDay">
+                    <!-- day 1 -->
+                    <div class="days" id="dayOne">
+                        day 1
+                    </div>
+                    <!-- day 2 -->
+                    <div class="days" id="dayTwo">
+                        day 2
+                    </div>
+                    <!-- day 3 -->
+                    <div class="days" id="dayThree">
+                        day 3
+                    </div>
+                    <!-- day 4 -->
+                    <div class="days" id="dayFour">
+                        day 4
+                    </div>
+                    <!-- day 5 -->
+                    <div class="days" id="dayFive">
+                        day 5
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>
