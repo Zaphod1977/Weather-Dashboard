@@ -42,36 +42,43 @@ function populateWeather(data) {
 
     // initial instance of 5 day forecast
 
+    var today = moment();
+    var dayOne = moment(today).add(1, 'days');
+    var dayTwo = moment(today).add(2, 'days');
+    var dayThree = moment(today).add(3, 'days');
+    var dayFour = moment(today).add(4, 'days');
+    var dayFive = moment(today).add(5, 'days');   
+
     $("#dayOne").empty()
-    $("#dayOne").append("<h5>" + data.daily[0].dt + "</h5>")
+    $("#dayOne").text(dayOne)
     $("#dayOne").append("<img src='http://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png'>")
     $("#dayOne").append("<h5>  Temp: " + data.daily[0].temp.eve + "</h5>")
     $("#dayOne").append("<h5>  Wind " + data.daily[0].wind_speed + "</h5>")
     $("#dayOne").append("<h5>  Humidity " + data.daily[0].humidity + "</h5>")
 
     $("#dayTwo").empty()
-    $("#dayTwo").append("<h5>" + data.daily[1].dt + "</h5>")
+    $("#dayTwo").text(dayTwo)
     $("#dayTwo").append("<img src='http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png'>")
     $("#dayTwo").append("<h5>  Temp: " + data.daily[1].temp.eve + "</h5>")
     $("#dayTwo").append("<h5>  Wind " + data.daily[1].wind_speed + "</h5>")
     $("#dayTwo").append("<h5>  Humidity " + data.daily[1].humidity + "</h5>")
 
     $("#dayThree").empty()
-    $("#dayThree").append("<h5>" + data.daily[2].dt + "</h5>")
+    $("#dayThree").text(dayThree)
     $("#dayThree").append("<img src='http://openweathermap.org/img/wn/" + data.daily[2].weather[0].icon + ".png'>")
     $("#dayThree").append("<h5>  Temp: " + data.daily[2].temp.eve + "</h5>")
     $("#dayThree").append("<h5>  Wind " + data.daily[2].wind_speed + "</h5>")
     $("#dayThree").append("<h5>  Humidity " + data.daily[2].humidity + "</h5>")
 
     $("#dayFour").empty()
-    $("#dayFour").append("<h5>" + data.daily[3].dt + "</h5>")
+    $("#dayFour").text(dayFour)
     $("#dayFour").append("<img src='http://openweathermap.org/img/wn/" + data.daily[3].weather[0].icon + ".png'>")
     $("#dayFour").append("<h5>  Temp: " + data.daily[3].temp.eve + "</h5>")
     $("#dayFour").append("<h5>  Wind " + data.daily[3].wind_speed + "</h5>")
     $("#dayFour").append("<h5>  Humidity " + data.daily[3].humidity + "</h5>")
 
     $("#dayFive").empty()
-    $("#dayFive").append("<h5>" + data.daily[4].dt + "</h5>")
+    $("#dayFive").text(dayFive)
     $("#dayFive").append("<img src='http://openweathermap.org/img/wn/" + data.daily[4].weather[0].icon + ".png'>")
     $("#dayFive").append("<h5>  Temp: " + data.daily[4].temp.eve + "</h5>")
     $("#dayFive").append("<h5>  Wind " + data.daily[4].wind_speed + "</h5>")
@@ -82,9 +89,9 @@ function populateWeather(data) {
     localStorage.setItem(cityName, JSON.stringify(cityObj));
     var cityButton = $("<div>").addClass("resultBtn").text(cityName);
     cityButton.on("click", function () {
-        console.log("click");
+        // console.log("click");
         var cityData = JSON.parse(localStorage.getItem($(this).text()))
-        console.log(cityData.daily);
+        // console.log(cityData.daily);
         $("#localFcst").empty()
         $("#localFcst").append("<h1>" + cityData.name + "</h1>")
         $("#localFcst").append("<h3> Temp: " + cityData.temp + "</h3>")
@@ -94,41 +101,42 @@ function populateWeather(data) {
 
         // on click instance of 5 day forecast
         $("#dayOne").empty()
-        $("#dayOne").append("<h5>" + data.daily[0].dt + "</h5>")
+        $("#dayOne").text(dayOne)
         $("#dayOne").append("<img src='http://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png'>")
         $("#dayOne").append("<h5>  Temp: " + data.daily[0].temp.eve + "</h5>")
         $("#dayOne").append("<h5>  Wind " + data.daily[0].wind_speed + "</h5>")
         $("#dayOne").append("<h5>  Humidity " + data.daily[0].humidity + "</h5>")
 
         $("#dayTwo").empty()
-        $("#dayTwo").append("<h5>" + data.daily[1].dt + "</h5>")
+        $("#dayTwo").text(dayTwo)
         $("#dayTwo").append("<img src='http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png'>")
         $("#dayTwo").append("<h5>  Temp: " + data.daily[1].temp.eve + "</h5>")
         $("#dayTwo").append("<h5>  Wind " + data.daily[1].wind_speed + "</h5>")
         $("#dayTwo").append("<h5>  Humidity " + data.daily[1].humidity + "</h5>")
 
         $("#dayThree").empty()
-        $("#dayThree").append("<h5>" + data.daily[2].dt + "</h5>")
+        $("#dayThree").text(dayThree)
         $("#dayThree").append("<img src='http://openweathermap.org/img/wn/" + data.daily[2].weather[0].icon + ".png'>")
         $("#dayThree").append("<h5>  Temp: " + data.daily[2].temp.eve + "</h5>")
         $("#dayThree").append("<h5>  Wind " + data.daily[2].wind_speed + "</h5>")
         $("#dayThree").append("<h5>  Humidity " + data.daily[2].humidity + "</h5>")
 
         $("#dayFour").empty()
-        $("#dayFour").append("<h5>" + data.daily[3].dt + "</h5>")
+        $("#dayFour").text(dayFour)
         $("#dayFour").append("<img src='http://openweathermap.org/img/wn/" + data.daily[3].weather[0].icon + ".png'>")
         $("#dayFour").append("<h5>  Temp: " + data.daily[3].temp.eve + "</h5>")
         $("#dayFour").append("<h5>  Wind " + data.daily[3].wind_speed + "</h5>")
         $("#dayFour").append("<h5>  Humidity " + data.daily[3].humidity + "</h5>")
 
         $("#dayFive").empty()
-        $("#dayFive").append("<h5>" + data.daily[4].dt + "</h5>")
+        $("#dayFive").text(dayFive)
         $("#dayFive").append("<img src='http://openweathermap.org/img/wn/" + data.daily[4].weather[0].icon + ".png'>")
         $("#dayFive").append("<h5>  Temp: " + data.daily[4].temp.eve + "</h5>")
         $("#dayFive").append("<h5>  Wind " + data.daily[4].wind_speed + "</h5>")
         $("#dayFive").append("<h5>  Humidity " + data.daily[4].humidity + "</h5>")
 
     });
+
 
     $("#resultsDiv").append(cityButton);
 }

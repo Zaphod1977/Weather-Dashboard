@@ -139,12 +139,16 @@ p {
     flex-direction: column;
     justify-content: space-around;
     align-items: baseline;
-    padding: ;
+    padding: 0 0 0 10px;
 }
 .days img {
     height: 50px;
 }
 .days h5 {
-    margin: 0 0 0 5px;
+    margin: 0 0 0 0px;
     font-size: 70%;
+}
+.days .text {
+    font-size: 90%;
+    margin: 0 0 0 0px;
 }
