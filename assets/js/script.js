@@ -1,40 +1,135 @@
-// form inputs to search for a city
+// initiat search, source 3rd party api data, interpolate coodinates to city names, produce data
 
+$('#srcBtn').click(function () {
+    var city = $('#searchField').val();
+    $("#localFcst").empty();
+    $('#localFcst').append("<h1>" + city + "</h1>")
+    $.ajax({
+        url: "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",840&limit=1&appid=7a1a53ab77da01ea835cb4760a59e848",
+        success: function (data) {
+            $.ajax({
+                url: "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" + data[0].lat + "&lon=" + data[0].lon + "&appid=7a1a53ab77da01ea835cb4760a59e848",
+                success: function (weather) {
+                    populateWeather(weather);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        },
+        error: function (er) {
+            console.log(er);
+        }
+    })
+});
 
-// current & future conditions for that city
+// populating weather data for main current weather pane and packaging data for use later
 
+function populateWeather(data) {
+    var cityName = $("#localFcst h1").first().text();
+    $("#localFcst").append("<h3>Temp: " + data.current.temp + "</h3>")
+    $("#localFcst").append("<h3> Wind: " + data.current.wind_speed + "</h3>")
+    $("#localFcst").append("<h3> Humidity: " + data.current.humidity + "</h3>")
+    $("#localFcst").append("<h3> UV Index: " + data.current.uvi + "</h3>")
+    var cityObj = {
+        name: $("#localFcst h1").first().text(),
+        temp: data.current.temp,
+        wind: data.current.wind_speed,
+        humidity: data.current.humidity,
+        uvi: data.current.uvi,
+        daily: data.daily
+    }
 
-// city is added to the search history
+    // initial instance of 5 day forecast
 
+    $("#dayOne").empty()
+    $("#dayOne").append("<h5>" + data.daily[0].dt + "</h5>")
+    $("#dayOne").append("<img src='http://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png'>")
+    $("#dayOne").append("<h5>  Temp: " + data.daily[0].temp.eve + "</h5>")
+    $("#dayOne").append("<h5>  Wind " + data.daily[0].wind_speed + "</h5>")
+    $("#dayOne").append("<h5>  Humidity " + data.daily[0].humidity + "</h5>")
 
-//  I get weather conditions for that city
+    $("#dayTwo").empty()
+    $("#dayTwo").append("<h5>" + data.daily[1].dt + "</h5>")
+    $("#dayTwo").append("<img src='http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png'>")
+    $("#dayTwo").append("<h5>  Temp: " + data.daily[1].temp.eve + "</h5>")
+    $("#dayTwo").append("<h5>  Wind " + data.daily[1].wind_speed + "</h5>")
+    $("#dayTwo").append("<h5>  Humidity " + data.daily[1].humidity + "</h5>")
 
+    $("#dayThree").empty()
+    $("#dayThree").append("<h5>" + data.daily[2].dt + "</h5>")
+    $("#dayThree").append("<img src='http://openweathermap.org/img/wn/" + data.daily[2].weather[0].icon + ".png'>")
+    $("#dayThree").append("<h5>  Temp: " + data.daily[2].temp.eve + "</h5>")
+    $("#dayThree").append("<h5>  Wind " + data.daily[2].wind_speed + "</h5>")
+    $("#dayThree").append("<h5>  Humidity " + data.daily[2].humidity + "</h5>")
 
-/* data presented {
-    city name 
-    date
-    icon representation of weather conditions
-    temperature
-    humidity
-    wind speed
-    UV index
-} */
+    $("#dayFour").empty()
+    $("#dayFour").append("<h5>" + data.daily[3].dt + "</h5>")
+    $("#dayFour").append("<img src='http://openweathermap.org/img/wn/" + data.daily[3].weather[0].icon + ".png'>")
+    $("#dayFour").append("<h5>  Temp: " + data.daily[3].temp.eve + "</h5>")
+    $("#dayFour").append("<h5>  Wind " + data.daily[3].wind_speed + "</h5>")
+    $("#dayFour").append("<h5>  Humidity " + data.daily[3].humidity + "</h5>")
 
+    $("#dayFive").empty()
+    $("#dayFive").append("<h5>" + data.daily[4].dt + "</h5>")
+    $("#dayFive").append("<img src='http://openweathermap.org/img/wn/" + data.daily[4].weather[0].icon + ".png'>")
+    $("#dayFive").append("<h5>  Temp: " + data.daily[4].temp.eve + "</h5>")
+    $("#dayFive").append("<h5>  Wind " + data.daily[4].wind_speed + "</h5>")
+    $("#dayFive").append("<h5>  Humidity " + data.daily[4].humidity + "</h5>")
 
-/* from the UV index I'll apply a class to indicate {
-    favorable
-    moderate 
-    severe
-} */
+    // On click funtions of searched for cities
 
+    localStorage.setItem(cityName, JSON.stringify(cityObj));
+    var cityButton = $("<div>").addClass("resultBtn").text(cityName);
+    cityButton.on("click", function () {
+        console.log("click");
+        var cityData = JSON.parse(localStorage.getItem($(this).text()))
+        console.log(cityData.daily);
+        $("#localFcst").empty()
+        $("#localFcst").append("<h1>" + cityData.name + "</h1>")
+        $("#localFcst").append("<h3> Temp: " + cityData.temp + "</h3>")
+        $("#localFcst").append("<h3> Wind: " + cityData.wind + "</h3>")
+        $("#localFcst").append("<h3> Humidity: " + cityData.humidity + "</h3>")
+        $("#localFcst").append("<h3> UV Index: " + cityData.uvi + "</h3>")
 
-/* I'll build a 5-day forecast for {
-    date 
-    icon representation of weather conditions
-    temperature 
-    wind speed 
-    humidity
-} */
+        // on click instance of 5 day forecast
+        $("#dayOne").empty()
+        $("#dayOne").append("<h5>" + data.daily[0].dt + "</h5>")
+        $("#dayOne").append("<img src='http://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png'>")
+        $("#dayOne").append("<h5>  Temp: " + data.daily[0].temp.eve + "</h5>")
+        $("#dayOne").append("<h5>  Wind " + data.daily[0].wind_speed + "</h5>")
+        $("#dayOne").append("<h5>  Humidity " + data.daily[0].humidity + "</h5>")
 
+        $("#dayTwo").empty()
+        $("#dayTwo").append("<h5>" + data.daily[1].dt + "</h5>")
+        $("#dayTwo").append("<img src='http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png'>")
+        $("#dayTwo").append("<h5>  Temp: " + data.daily[1].temp.eve + "</h5>")
+        $("#dayTwo").append("<h5>  Wind " + data.daily[1].wind_speed + "</h5>")
+        $("#dayTwo").append("<h5>  Humidity " + data.daily[1].humidity + "</h5>")
 
-// When you click on a city in the search history present the data again
+        $("#dayThree").empty()
+        $("#dayThree").append("<h5>" + data.daily[2].dt + "</h5>")
+        $("#dayThree").append("<img src='http://openweathermap.org/img/wn/" + data.daily[2].weather[0].icon + ".png'>")
+        $("#dayThree").append("<h5>  Temp: " + data.daily[2].temp.eve + "</h5>")
+        $("#dayThree").append("<h5>  Wind " + data.daily[2].wind_speed + "</h5>")
+        $("#dayThree").append("<h5>  Humidity " + data.daily[2].humidity + "</h5>")
+
+        $("#dayFour").empty()
+        $("#dayFour").append("<h5>" + data.daily[3].dt + "</h5>")
+        $("#dayFour").append("<img src='http://openweathermap.org/img/wn/" + data.daily[3].weather[0].icon + ".png'>")
+        $("#dayFour").append("<h5>  Temp: " + data.daily[3].temp.eve + "</h5>")
+        $("#dayFour").append("<h5>  Wind " + data.daily[3].wind_speed + "</h5>")
+        $("#dayFour").append("<h5>  Humidity " + data.daily[3].humidity + "</h5>")
+
+        $("#dayFive").empty()
+        $("#dayFive").append("<h5>" + data.daily[4].dt + "</h5>")
+        $("#dayFive").append("<img src='http://openweathermap.org/img/wn/" + data.daily[4].weather[0].icon + ".png'>")
+        $("#dayFive").append("<h5>  Temp: " + data.daily[4].temp.eve + "</h5>")
+        $("#dayFive").append("<h5>  Wind " + data.daily[4].wind_speed + "</h5>")
+        $("#dayFive").append("<h5>  Humidity " + data.daily[4].humidity + "</h5>")
+
+    });
+
+    $("#resultsDiv").append(cityButton);
+}
+
