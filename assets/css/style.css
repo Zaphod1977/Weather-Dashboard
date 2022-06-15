@@ -75,6 +75,7 @@ p {
     background-color: rgb(125, 191, 212);
     text-align: center;
     padding: 15px 0 0 0;
+    cursor: pointer;   
 }
 
 .Btn {
