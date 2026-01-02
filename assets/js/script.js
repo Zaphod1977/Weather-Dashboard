@@ -8,7 +8,7 @@ $('#srcBtn').click(function () {
         url: "https://api.openweathermap.org/geo/1.0/direct?q=" + city + ",840&limit=1&appid=7a1a53ab77da01ea835cb4760a59e848",
         success: function (data) {
             $.ajax({
-                url: "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" + data[0].lat + "&lon=" + data[0].lon + "&appid=7a1a53ab77da01ea835cb4760a59e848",
+                url: "https://api.openweathermap.org/data/3.0/onecall?units=imperial&lat=" + data[0].lat + "&lon=" + data[0].lon + "&appid=7a1a53ab77da01ea835cb4760a59e848",
                 success: function (weather) {
                     populateWeather(weather);
                 },
